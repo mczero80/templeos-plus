@@ -1,7 +1,7 @@
 #!/bin/sh
 
 usage() {
-    echo "Usage: ./sync.sh <host|temple> <name>.img"
+    echo "Usage: ./sync.sh <hosttotemple|templetohost> <name>.img"
 }
 
 if [ $# -lt 1 ]; then
@@ -27,10 +27,10 @@ set -xe
 ./mount.sh "$IMAGE_PATH"
 
 case "$SUBCOMMAND" in
-    "host")
+    "hosttotemple")
         rsync -avz --delete $QEMU_IMG_MOUNT_DIR/Home ./
         ;;
-    "temple")
+    "templetohost")
         rsync -avz --delete ./Home $QEMU_IMG_MOUNT_DIR/
         ;;
     *)
